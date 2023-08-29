@@ -46,10 +46,14 @@ class Pencil {
         if (hasGrafite()) {
             int usagePerSheet = tip.usagePerSheet();
             int size = this.tip.getSize();
-            if (usagePerSheet <= size) {
-                this.tip.setSize(size - usagePerSheet);
+            if (usagePerSheet <= size && size > 10) {
+                if ((size - usagePerSheet) < 10) {
+                    System.out.println("fail: folha incompleta");
+                    this.tip.setSize(10);
+                } else this.tip.setSize(size - usagePerSheet);
+                
             } else {
-                System.out.println("tamanho insuficiente");
+                System.out.println("fail: tamanho insuficiente");
             }
         } else {
             System.out.println("fail: nao existe grafite");
