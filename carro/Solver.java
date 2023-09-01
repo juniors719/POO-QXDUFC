@@ -1,3 +1,10 @@
+/**
+ * 1. Fiz tudo, e passou em todos os testes
+ * 2. Fiz sozinho
+ * 3. Construtores
+ * 4. 30 minutos
+ */
+
 package carro;
 import java.util.*;
 

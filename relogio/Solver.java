@@ -66,13 +66,7 @@ class Time {
 
     @Override
     public String toString() {
-        String saida = "";
-        saida += (this.hour < 10) ? "0" + this.hour : this.hour;
-        saida += ":";
-        saida += (this.minute < 10) ? "0" + this.minute : this.minute;
-        saida += ":";
-        saida += (this.second < 10) ? "0" + this.second : this.second;
-        return saida;
+        return String.format("%02d:%02d:%02d", this.hour, this.minute, this.second);
     }
 
     
