@@ -8,8 +8,8 @@ class Trampoline {
     private LinkedList<Kid> playing;
     private LinkedList<Kid> waiting;
 
-    public static Kid removeFromList(String name, LinkedList<Kid> list){
-        for(Kid kid : list) {
+    public static Kid removeFromList(String name, LinkedList<Kid> list) {
+        for (Kid kid : list) {
             if (kid.getName().equals(name)) {
                 Kid removedKid = kid;
                 list.remove(kid);
@@ -27,12 +27,12 @@ class Trampoline {
     @Override
     public String toString() {
         String waitingList = waiting.stream()
-                                    .map(kid -> kid.getName() + ":" + kid.getAge())
-                                    .collect(Collectors.joining(", "));
+                .map(kid -> kid.getName() + ":" + kid.getAge())
+                .collect(Collectors.joining(", "));
 
         String playingList = playing.stream()
-                                    .map(kid -> kid.getName() + ":" + kid.getAge())
-                                    .collect(Collectors.joining(", "));
+                .map(kid -> kid.getName() + ":" + kid.getAge())
+                .collect(Collectors.joining(", "));
 
         return "[" + waitingList + "] => [" + playingList + "]";
     }
@@ -57,9 +57,11 @@ class Trampoline {
 
     public Kid remove(String name) {
         Kid removedKidFromWaiting = removeFromList(name, this.waiting);
-        if (removedKidFromWaiting != null) return removedKidFromWaiting;
+        if (removedKidFromWaiting != null)
+            return removedKidFromWaiting;
         Kid removedKidFromPlaying = removeFromList(name, this.playing);
-        if (removedKidFromPlaying != null) return removedKidFromPlaying;
+        if (removedKidFromPlaying != null)
+            return removedKidFromPlaying;
         return null;
     }
 }

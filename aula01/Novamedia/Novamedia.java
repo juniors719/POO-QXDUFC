@@ -12,19 +12,22 @@ class Aluno {
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public float[] getNotas() {
         return notas;
     }
+
     public void setNotas(float[] notas) {
         this.notas = notas;
     }
+
     public float getMedia() {
         return media;
     }
-    
 
     public void lerDetalhes() {
         Scanner in = new Scanner(System.in);
@@ -49,7 +52,7 @@ class Aluno {
         NumberFormat format = new DecimalFormat("#0,00");
         System.out.println(format.format(getMedia()));
     }
-    
+
 }
 
 public class Novamedia {

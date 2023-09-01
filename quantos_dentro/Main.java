@@ -48,7 +48,7 @@ public class Main {
             }
         }
         System.out.println(quantDentro);
-        in.close();        
+        in.close();
     }
 
 }

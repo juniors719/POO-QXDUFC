@@ -2,26 +2,33 @@ package cinema;
 
 public class Client {
 
-    private String fone;
     private String id;
+    private String fone;
 
     public Client(String id, String fone) {
         this.id = id;
         this.fone = fone;
     }
 
-    // GETTERS AND SETTERS
-    public String getFone() {
-        return fone;
+    @Override
+    public String toString() {
+        return id + ":" + fone;
     }
-    public void setFone(String fone) {
-        this.fone = fone;
-    }
+
     public String getId() {
-        return id;
+        return this.id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
-    
+
+    public String getFone() {
+        return this.fone;
+    }
+
+    public void setFone(String fone) {
+        this.fone = fone;
+    }
+
 }
