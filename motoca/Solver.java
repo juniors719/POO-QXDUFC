@@ -89,7 +89,8 @@ class Motorcycle {
 
     public void honk() {
         String honk = "P";
-        for(int i = 0; i < power; i++) honk += "e";
+        for (int i = 0; i < power; i++)
+            honk += "e";
         honk += "m";
         System.out.println(honk);
     }
@@ -122,26 +123,32 @@ class Motorcycle {
 public class Solver {
     static Motorcycle motoca = new Motorcycle(1);
 
-    public static void main(String[] args) {    
-        while(true) {
+    public static void main(String[] args) {
+        while (true) {
             String line = input();
             args = line.split(" ");
             write('$' + line);
 
-            if      (args[0].equals("show"))     { System.out.println(motoca);                         }
-            else if (args[0].equals("init"))     { motoca = new Motorcycle(number(args[1]));           }  
-            else if (args[0].equals("buy"))      { motoca.buyTime(number(args[1]));                        }
-            else if (args[0].equals("drive"))    { motoca.drive(number(args[1]));                      }
-            else if (args[0].equals("enter"))    { motoca.insertPerson(new Person(args[1], number(args[2]))); }
-            else if (args[0].equals("honk"))     { motoca.honk();                                      }
-            else if (args[0].equals("leave"))    {
+            if (args[0].equals("show")) {
+                System.out.println(motoca);
+            } else if (args[0].equals("init")) {
+                motoca = new Motorcycle(number(args[1]));
+            } else if (args[0].equals("buy")) {
+                motoca.buyTime(number(args[1]));
+            } else if (args[0].equals("drive")) {
+                motoca.drive(number(args[1]));
+            } else if (args[0].equals("enter")) {
+                motoca.insertPerson(new Person(args[1], number(args[2])));
+            } else if (args[0].equals("honk")) {
+                motoca.honk();
+            } else if (args[0].equals("leave")) {
                 Person person = motoca.remove();
-                if(person != null) {
+                if (person != null) {
                     System.out.println(person.toString());
                 }
-            }
-            else if (args[0].equals("end"))      { break;                                              }
-            else
+            } else if (args[0].equals("end")) {
+                break;
+            } else
                 System.out.println("fail: comando invalido");
         }
         scanner.close();
@@ -149,7 +156,15 @@ public class Solver {
 
     static Scanner scanner = new Scanner(System.in);
 
-    public static String input()           { return scanner.nextLine();    }
-    public static void write(String value) { System.out.println(value);    }
-    public static int number(String str)   { return Integer.parseInt(str); }
+    public static String input() {
+        return scanner.nextLine();
+    }
+
+    public static void write(String value) {
+        System.out.println(value);
+    }
+
+    public static int number(String str) {
+        return Integer.parseInt(str);
+    }
 }

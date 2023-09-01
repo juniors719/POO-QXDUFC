@@ -14,14 +14,17 @@ public class Client {
     public String getFone() {
         return fone;
     }
+
     public void setFone(String fone) {
         this.fone = fone;
     }
+
     public String getId() {
         return id;
     }
+
     public void setId(String id) {
         this.id = id;
     }
-    
+
 }

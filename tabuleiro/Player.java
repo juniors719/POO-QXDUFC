@@ -17,16 +17,19 @@ public class Player {
     }
 
     // GETTER AND SETTERS
-    
+
     public int getLabel() {
         return label;
     }
+
     public int getPos() {
         return pos;
     }
+
     public void setPos(int pos) {
         this.pos = pos;
     }
+
     public void setFree(boolean free) {
         this.free = free;
     }
@@ -36,9 +39,4 @@ public class Player {
         return "";
     }
 
-    
-
-    
-
-    
 }

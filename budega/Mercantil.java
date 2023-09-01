@@ -4,20 +4,23 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class Mercantil {
-    
+
     private ArrayList<Pessoa> caixas;
     private LinkedList<Pessoa> esperando = null;
 
     private boolean validarIndice(int indice) {
-        if (indice < this.caixas.size()) return true;
+        if (indice < this.caixas.size())
+            return true;
         return false;
     }
 
     public Mercantil(int quantCaixas) {
         if (quantCaixas > 0) {
             this.caixas = new ArrayList<>(quantCaixas);
-            for (int i = 0; i < quantCaixas; i++) this.caixas.add(i, null);
-        } else this.caixas = null;
+            for (int i = 0; i < quantCaixas; i++)
+                this.caixas.add(i, null);
+        } else
+            this.caixas = null;
         this.esperando = new LinkedList<>();
     }
 
@@ -25,9 +28,11 @@ public class Mercantil {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("Caixas: [");
-        if (caixas != null ) sb.append(caixas.stream().map(c -> c == null ? "-----" : c.getNome()).collect(Collectors.joining(", ")));
+        if (caixas != null)
+            sb.append(caixas.stream().map(c -> c == null ? "-----" : c.getNome()).collect(Collectors.joining(", ")));
         sb.append("]\nEspera: [");
-        if (esperando != null) sb.append(esperando.stream().map(c -> c.getNome()).collect(Collectors.joining(", ")));
+        if (esperando != null)
+            sb.append(esperando.stream().map(c -> c.getNome()).collect(Collectors.joining(", ")));
         sb.append("]");
         return sb.toString();
     }
@@ -72,7 +77,8 @@ public class Mercantil {
     public boolean furarFila(Pessoa furao, String besta) {
         int posicaoBesta = -1;
         for (int i = 0; i < esperando.size(); i++) {
-            if(besta.equals(furao.getNome())) posicaoBesta = i;
+            if (besta.equals(furao.getNome()))
+                posicaoBesta = i;
         }
         if (posicaoBesta >= 0) {
             esperando.add(posicaoBesta, furao);
@@ -84,7 +90,7 @@ public class Mercantil {
     public boolean desistir(String desistente) {
         int posicaoDesistente = -1;
         for (int i = 0; i < esperando.size(); i++) {
-            if(esperando.get(i).getNome().equals(desistente)) {
+            if (esperando.get(i).getNome().equals(desistente)) {
                 posicaoDesistente = i;
             }
             if (posicaoDesistente >= 0) {

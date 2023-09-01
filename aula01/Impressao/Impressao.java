@@ -1,4 +1,5 @@
 package Impressao;
+
 import java.util.Scanner;
 
 class Aluno {
@@ -11,24 +12,31 @@ class Aluno {
     public String getNome() {
         return nome;
     }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
+
     public int getMatricula() {
         return matricula;
     }
+
     public void setMatricula(int matricula) {
         this.matricula = matricula;
     }
+
     public String getDisciplina() {
         return disciplina;
     }
+
     public void setDisciplina(String disciplina) {
         this.disciplina = disciplina;
     }
+
     public float getNota() {
         return nota;
     }
+
     public void setNota(float nota) {
         this.nota = nota;
     }
@@ -52,7 +60,7 @@ class Aluno {
 }
 
 class Impressao {
-    public static void main (String[] args) {
+    public static void main(String[] args) {
 
         Aluno aluno = new Aluno();
 

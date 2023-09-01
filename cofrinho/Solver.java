@@ -20,7 +20,7 @@ enum Coin {
         this.label = label;
     }
 
-    public int getVolume(){
+    public int getVolume() {
         return this.volume;
     }
 
@@ -74,7 +74,7 @@ class Pig {
 
     public int getVolume() {
         int totalVolume = 0;
-        if(!isBroken()) {
+        if (!isBroken()) {
             for (Coin coin : coins) {
                 totalVolume += coin.getVolume();
             }
@@ -145,7 +145,7 @@ class Pig {
     public boolean breakPig() {
         if (!broken) {
             broken = true;
-            
+
             return true;
         }
         return false;
@@ -180,20 +180,19 @@ class Pig {
     @Override
     public String toString() {
         String coinsString = coins.stream()
-                                .map(coin -> String.format("%.2f:%d", coin.getValue(), coin.getVolume()))
-                                .collect(Collectors.joining(", "));
-        
-        String itemsString = items.stream()
-                                .map(item -> item.getLabel() + ":" + item.getVolume())
-                                .collect(Collectors.joining(", "));
-        
-        return "state=" + (isBroken() ? "broken" : "intact") +
-            " : coins=[" + coinsString + "]" +
-            " : items=[" + itemsString + "]" +
-            " : value=" + String.format("%.2f", getValue()) +
-            " : volume=" + getVolume() + "/" + getVolumeMax();
-    }
+                .map(coin -> String.format("%.2f:%d", coin.getValue(), coin.getVolume()))
+                .collect(Collectors.joining(", "));
 
+        String itemsString = items.stream()
+                .map(item -> item.getLabel() + ":" + item.getVolume())
+                .collect(Collectors.joining(", "));
+
+        return "state=" + (isBroken() ? "broken" : "intact") +
+                " : coins=[" + coinsString + "]" +
+                " : items=[" + itemsString + "]" +
+                " : value=" + String.format("%.2f", getValue()) +
+                " : volume=" + getVolume() + "/" + getVolumeMax();
+    }
 
 }
 

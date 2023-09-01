@@ -20,7 +20,8 @@ public class Sala {
 
     public Sala(int capacidade) {
         cadeiras = new HashMap<>(capacidade);
-        for (String c : cadeiras.keySet()) cadeiras.put(c, null);
+        for (String c : cadeiras.keySet())
+            cadeiras.put(c, null);
     }
 
     public boolean reservar(String id, String fone, int id) {
@@ -41,5 +42,5 @@ public class Sala {
         // todo
         return "";
     }
-    
+
 }

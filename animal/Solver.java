@@ -15,14 +15,16 @@ class Animal {
     }
 
     public String fazerBarulho() {
-        if(this.idade == 0) return "---";
-        else if (idade == 4) return "RIP";
+        if (this.idade == 0)
+            return "---";
+        else if (idade == 4)
+            return "RIP";
         return barulho;
     }
 
     public void envelhecer(int nivel) {
         this.idade += nivel;
-        if(this.idade >= 4) {
+        if (this.idade >= 4) {
             System.out.println("warning: " + this.especie + " morreu");
             this.idade = 4;
         }
@@ -32,7 +34,6 @@ class Animal {
     public String toString() {
         return this.especie + ":" + this.idade + ":" + this.barulho;
     }
-    
 
 }
 
@@ -63,8 +64,17 @@ public class Solver {
     }
 
     static Scanner scanner = new Scanner(System.in);
-    public static String input()           { return scanner.nextLine();    }
-    public static void write(String value) { System.out.println(value);    }
-    public static int number(String str)   { return Integer.parseInt(str); }
+
+    public static String input() {
+        return scanner.nextLine();
+    }
+
+    public static void write(String value) {
+        System.out.println(value);
+    }
+
+    public static int number(String str) {
+        return Integer.parseInt(str);
+    }
 
 }

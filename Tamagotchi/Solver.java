@@ -81,12 +81,12 @@ class Pet {
     }
 
     @Override
-    public String toString(){
-        return "E:" + this.energy + "/" + this.energyMax + 
-        ", S:" + this.hungry + "/" + this.hungryMax + 
-        ", L:" + this.clean + "/" + this.cleanMax + 
-        ", D:" + this.diamonds + 
-        ", I:" + this.age;
+    public String toString() {
+        return "E:" + this.energy + "/" + this.energyMax +
+                ", S:" + this.hungry + "/" + this.hungryMax +
+                ", L:" + this.clean + "/" + this.cleanMax +
+                ", D:" + this.diamonds +
+                ", I:" + this.age;
     }
 
     public void eat() {
@@ -99,7 +99,8 @@ class Pet {
     }
 
     public void play() {
-        if (!testAlive()) return;
+        if (!testAlive())
+            return;
         setEnergy(getEnergy() - 2);
         setHungry(getHungry() - 1);
         setClean(getClean() - 3);
@@ -108,7 +109,8 @@ class Pet {
     }
 
     public void shower() {
-        if(!testAlive()) return;
+        if (!testAlive())
+            return;
         setEnergy(getEnergy() - 3);
         setHungry(getHungry() - 1);
         setClean(getCleanMax());
@@ -116,7 +118,8 @@ class Pet {
     }
 
     public void sleep() {
-        if (!testAlive()) return;
+        if (!testAlive())
+            return;
         if (getEnergyMax() - getEnergy() < 5) {
             System.out.println("fail: nao esta com sono");
             return;
@@ -127,37 +130,54 @@ class Pet {
     }
 
     private boolean testAlive() {
-        if (this.alive == true) return true;
+        if (this.alive == true)
+            return true;
         System.out.println("fail: pet esta morto");
         return false;
     }
-    
+
 }
-
-
 
 public class Solver {
     public static void main(String[] a) {
         Pet pet = new Pet(0, 0, 0);
-        
+
         while (true) {
             var line = input();
             write("$" + line);
             var args = line.split(" ");
 
-            if      (args[0].equals("end"))   { break;                                                                           }
-            else if (args[0].equals("show"))  { write(pet.toString());                                                           }
-            else if (args[0].equals("init"))  { pet = new Pet((int)number(args[1]), (int)number(args[2]), (int)number(args[3])); }
-            else if (args[0].equals("play"))  { pet.play();                                                                      }
-            else if (args[0].equals("eat"))   { pet.eat();                                                                       }
-            else if (args[0].equals("sleep")) { pet.sleep();                                                                     }
-            else if (args[0].equals("shower")){ pet.shower();                                                                    }
-            else                              { write("fail: comando invalido");                                                 }
+            if (args[0].equals("end")) {
+                break;
+            } else if (args[0].equals("show")) {
+                write(pet.toString());
+            } else if (args[0].equals("init")) {
+                pet = new Pet((int) number(args[1]), (int) number(args[2]), (int) number(args[3]));
+            } else if (args[0].equals("play")) {
+                pet.play();
+            } else if (args[0].equals("eat")) {
+                pet.eat();
+            } else if (args[0].equals("sleep")) {
+                pet.sleep();
+            } else if (args[0].equals("shower")) {
+                pet.shower();
+            } else {
+                write("fail: comando invalido");
+            }
         }
     }
 
     private static Scanner scanner = new Scanner(System.in);
-    private static String  input()              { return scanner.nextLine(); }
-    private static double  number(String value) { return Double.parseDouble(value); }
-    private static void    write(String value)  { System.out.println(value); }
-} 
+
+    private static String input() {
+        return scanner.nextLine();
+    }
+
+    private static double number(String value) {
+        return Double.parseDouble(value);
+    }
+
+    private static void write(String value) {
+        System.out.println(value);
+    }
+}
