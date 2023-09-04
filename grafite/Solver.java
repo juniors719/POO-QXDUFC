@@ -20,7 +20,13 @@ class Pencil {
     }
 
     public boolean hasGrafite() {
+<<<<<<< HEAD
         return this.tip != null;
+=======
+        if (this.tip != null)
+            return true;
+        return false;
+>>>>>>> 58cb8717097b7bf62e140563fac48d32e1270448
     }
 
     public boolean insert(Lead lead) {

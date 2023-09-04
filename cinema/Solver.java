@@ -3,6 +3,7 @@ package cinema;
 import java.util.*;
 
 public class Solver {
+<<<<<<< HEAD
     static Shell sh = new Shell();
     static Sala sala = new Sala(0);
 
@@ -56,4 +57,7 @@ class Shell {
             }
         }
     }
+=======
+
+>>>>>>> 58cb8717097b7bf62e140563fac48d32e1270448
 }

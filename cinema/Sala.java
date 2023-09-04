@@ -27,10 +27,15 @@ public class Sala {
 
     public Sala(int capacidade) {
         cadeiras = new HashMap<>(capacidade);
+<<<<<<< HEAD
         clientes = new HashMap<>();
         for (int i = 0; i < capacidade; i++) {
             cadeiras.put(i, null);
         }
+=======
+        for (String c : cadeiras.keySet())
+            cadeiras.put(c, null);
+>>>>>>> 58cb8717097b7bf62e140563fac48d32e1270448
     }
 
     public List<Client> getCadeiras() {
