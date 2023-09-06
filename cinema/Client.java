@@ -27,4 +27,9 @@ public class Client {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return this.id + ":" + this.fone;
+    }
+
 }
