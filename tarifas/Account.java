@@ -40,7 +40,7 @@ public class Account {
             System.out.println("fail: index " + index + " is not a fee");
             return;
         }
-        int valueReverse = operacao.getValue();
+        int valueReverse = operacao.getValue() * (-1);
         balanceManager.addOperation(Label.reverse, valueReverse);
     }
 

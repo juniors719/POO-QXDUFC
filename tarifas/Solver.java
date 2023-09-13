@@ -23,10 +23,15 @@ public class Solver {
             } else if (ui[0].equals("fee")) {
                 ac.fee(Integer.parseInt(ui[1]));
             } else if (ui[0].equals("extract")) {
-
-            } else if (ui[0].equals("comprar")) {
+                ac.getBalanceManager().getExtract(Integer.parseInt(ui[1]));
             } else if (ui[0].equals("show")) {
                 System.out.println(ac);
+            } else if (ui[0].equals("reverse")) {
+                for (String v : ui) {
+                    if (v.equals("reverse"))
+                        continue;
+                    ac.reverse(Integer.parseInt(v));
+                }
             } else {
                 System.out.println("fail: comando invalido");
             }

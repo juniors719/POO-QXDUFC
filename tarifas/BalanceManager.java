@@ -9,8 +9,8 @@ public class BalanceManager {
     private int nextId; // id da próxima operação
 
     public BalanceManager() {
-        this.addOperation(Label.opening, 0);
         this.extract = new ArrayList<>();
+        this.addOperation(Label.opening, 0);
     }
 
     public void addOperation(Label label, int value) {
@@ -33,18 +33,21 @@ public class BalanceManager {
             return this.extract;
         }
         StringBuilder sb = new StringBuilder();
+        int tamanho = this.extract.size();
+        List<Operation> ext = new ArrayList<Operation>();
         if (qtdOp > 0) {
-            List<Operation> ext = new ArrayList<Operation>();
-            for (int i = this.extract.size() - qtdOp; i < qtdOp; i++) {
+            for (int i = tamanho - qtdOp; i < tamanho; i++) {
                 ext.add(this.extract.get(i));
                 sb.append(this.extract.get(i).toString());
+                sb.append("\n");
             }
-            return ext;
         } else {
-            for (int i = 0; i < extract.size(); i++) {
-
+            for (int i = 0; i < tamanho; i++) {
+                sb.append(this.extract.get(i).toString());
+                sb.append("\n");
             }
         }
+        System.out.print(sb);
         return extract;
     }
 
