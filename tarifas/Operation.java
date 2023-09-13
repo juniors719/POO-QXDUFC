@@ -16,7 +16,12 @@ public class Operation {
 
     @Override
     public String toString() {
-        return "Operation [index=" + index + ", label=" + label + ", value=" + value + ", balance=" + balance + "]";
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%2s", this.index)).append(":");
+        sb.append(String.format("%9s", this.label)).append(":");
+        sb.append(String.format("%5s", this.value)).append(":");
+        sb.append(String.format("%5s", this.balance));
+        return sb.toString();
     }
 
     public int getIndex() {

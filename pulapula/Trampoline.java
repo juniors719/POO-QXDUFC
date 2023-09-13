@@ -8,7 +8,7 @@ class Trampoline {
     private LinkedList<Kid> playing;
     private LinkedList<Kid> waiting;
 
-    public static Kid removeFromList(String name, LinkedList<Kid> list) {
+    private static Kid removeFromList(String name, LinkedList<Kid> list) {
         for (Kid kid : list) {
             if (kid.getName().equals(name)) {
                 Kid removedKid = kid;

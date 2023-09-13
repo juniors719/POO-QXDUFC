@@ -55,15 +55,21 @@ public class Board {
             if (p.isFree()) {
                 int newPos = p.getPos() + value;
                 int possible = this.boardSize - 1 - p.getPos();
-                if (value > possible)
+                if (value > possible) {
                     newPos = this.boardSize - 1;
+                    System.out.println("player" + p.getLabel() + " ganhou");
+                    this.running = false;
+                    p.setPos(newPos);
+                    players.addLast(p);
+                    return;
+                }
                 p.setPos(newPos);
                 System.out.println("player" + p.getLabel() + " andou para " + newPos);
                 if (traplist.contains(newPos)) {
                     System.out.println("player" + p.getLabel() + " caiu em uma armadilha");
                     p.setFree(false);
                 }
-                if (newPos == this.boardSize - 1) {
+                if (newPos >= this.boardSize - 1) {
                     System.out.println("player" + p.getLabel() + " ganhou");
                     this.running = false;
                 }
