@@ -23,6 +23,11 @@ import java.util.List;
 
 public class PalavraSecreta {
 
+    static String vermelho = "\u001B[31m";
+    static String verde = "\u001B[32m";
+    static String amarelo = "\u001B[33m";
+    static String reset = "\u001B[0m";
+
     private String wordOfTheDay;
     private int day;
     private User player;
@@ -55,13 +60,21 @@ public class PalavraSecreta {
         }
     }
 
+    /**
+     * 
+     * @brief Retorna uma string com a tentativa do usuário, com as cores
+     * 
+     * @param tentativa tentativa do usuário
+     * @return
+     */
     public String row(String tentativa) {
-        String booleanCharPosition = "00000";
-        String vermelho = "\u001B[31m";
-        String verde = "\u001B[32m";
-        String amarelo = "\u001B[33m";
-        String reset = "\u001B[0m";
+        // 0 representa vermelho, 1 representa verde, 2 representa amarelo
+        int[] booleanChars = new int[5];
+        int[] booleanCharsWordOfDay = new int[5];
+        // palavra usada para remover as letras verdes e amarelas
+        ArrayList<Character> auxWordList = new ArrayList<>();
         String resultado = "";
+        tentativa = tentativa.toLowerCase();
         if (this.player.getTentativas() == 6) {
             this.player.setPontos(0);
             this.player.setWinner(false);
@@ -76,27 +89,40 @@ public class PalavraSecreta {
             save(resultado);
             return verde + tentativa + reset + "\nVocê acertou!";
         }
-        String saida = "";
-        for (int i = 0; i < this.wordOfTheDay.length(); i++) {
-            String letra = String.valueOf(this.wordOfTheDay.charAt(i)).toLowerCase();
-            String letraTentativa = String.valueOf(tentativa.charAt(i)).toLowerCase();
-            if (wordOfTheDay.contains(letraTentativa)) {
-                // int index = wordOfTheDay.indexOf(letraTentativa);
-                if (letraTentativa.equals(letra)) {
-                    // contém e está na posição correta -> verde
-                    saida += verde + tentativa.charAt(i) + reset;
-                } else {
-                    // contém e está na posição incorreta -> amarelo
-                    saida += amarelo + tentativa.charAt(i) + reset;
+        // procurar primeiro todas as letras verdes
+        for (int i = 0; i < 5; i++) {
+            if (this.wordOfTheDay.charAt(i) == tentativa.charAt(i)) {
+                booleanChars[i] = 1; // 1 representa o verde
+                auxWordList.remove(i); // remover a letra da palavra
+            }
+        }
+        // procurar agora as letras amarelas, mas ignorando as letras verdes e amaerelas
+        for (int i = 0; i < 5; i++) {
+            if (booleanChars[i] == 0) {
+                for (char c : auxWord) {
+                    if (c == tentativa.charAt(i)) {
+                        booleanCharsWordOfDay[i] = 2; // 1 representa o amarelo
+                        auxWord[i] = ' '; // remover a letra da palavra
+                        break;
+                    }
                 }
+            }
+        }
+        for (char c : auxWord)
+            System.out.println(c);
+
+        // montar a string de resultado
+        for (int i = 0; i < 5; i++) {
+            if (booleanChars[i] == 0) {
+                resultado += vermelho + tentativa.charAt(i) + reset;
+            } else if (booleanChars[i] == 1) {
+                resultado += verde + tentativa.charAt(i) + reset;
             } else {
-                // não contém -> vermelho
-                saida += vermelho + tentativa.charAt(i) + reset;
+                resultado += amarelo + tentativa.charAt(i) + reset;
             }
         }
         this.player.setTentativas(this.player.getTentativas() + 1);
-        this.player.setPontos(calcPoints(this.wordOfTheDay.length() - tentativa.length(), tentativa.length()));
-        return saida;
+        return resultado;
     }
 
     private int calcPoints(int qtdVerde, int qtdAmarelo) {
