@@ -21,6 +21,7 @@ public class Client {
         for (Operation oper : this.operations) {
             saida.append(oper + "\n");
         }
+        saida.deleteCharAt(saida.length() - 1);
         return saida.toString();
     }
 
@@ -47,9 +48,11 @@ public class Client {
         // calcular o saldo do cliente
         int balance = 0;
         for (Operation oper : this.operations) {
-            if (oper.getLabel() == Label.GIVE)
+            if (oper.getLabel() == Label.GIVE || oper.getLabel() == Label.PLUS) {
                 balance += oper.getValue();
-            else
+                if (balance > this.limite)
+                    throw new RuntimeException(oper.getName());
+            } else
                 balance -= oper.getValue();
         }
         return balance;

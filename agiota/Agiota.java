@@ -1,31 +1,3 @@
-// Cadastrar Clientes
-// Cada cliente cadastrado tem um codenome único e um limite de crédito que ele pode ficar devendo ao agiota.
-// Emprestar Dinheiro.
-// Empréstimos são salvos como Transações de GIVE (porque ele dá com todo carinho) e são armazenadas tanto na lista do agiota como nos objetos dos clientes.
-// Cada transação deve receber do sistema um identificador numérico crescente.
-// A primeira transação tem id 0. A segunda tem id 1 e etc.
-// Uma transação tem um id inteiro, um nome de cliente, um label e um valor numérico.
-// Os labels das transções podem ser
-// GIVE: quando o agiota dá dinheiro pra pessoa.
-// TAKE: quando o agiota “pega” o dinheiro da pessoa.
-// PLUS: quando o agiota decide que é hora de cobrar juros e as dívidas de todos aumentam em 10%.
-// Os valores das transações sempre são positivos. Ptolomeu não entende números negativos. O que define se é entrada ou saída é o label.
-// Mostrar todos os clientes com o saldo de cada um.
-// Mostrar o histórico de transações de Ptolomeu.
-// Receber dinheiro.
-// Clientes pagam os empréstimos aos poucos. (As vezes, eles não pagam, mas seu Ptolomeu dá um jeito de pegar).
-// Matar um cliente.
-// As vezes Ptolomeu dá um chá de sumiço em quem não paga suas dívidas.
-// Pra não deixar pontas soltas ele move o cliente da lista de clientes vivos para a lista de clientes mortos.
-// Também retira as transações relacionadas ao cliente morto do histórico de transações dos vivos e move para o histórico de transações dos mortos.
-// Ele disse que quando você implmentou, você queria apagar complementamente os mortos do sistema, mas ele disse que ia ficar com saudade, por isso pediu a lista dos mortos.
-// O Classe cliente:
-// Não possui um objeto saldo. Para calcular o saldo, percorra o vetor de operações do cliente somando o que for entrada (GIVE) e retirando do que for saída (TAKE, PLUS).
-// Na hora de efetuar os juros.
-// Se por acaso alguém, por causa dos juros, tiver devendo mais do que o limite, essa pessoa também vai pro saco. Perdão, pra lista do mortos.
-// As transações:
-// O mesmo objeto transação é compartilhado entre o histórico do agiota e o histórico do cliente correspondente.
-// A lista dos mortos não são mortos de verdade, estão mortos no coração de Ptolomeu apenas, porque ele desistiu de cobrar a dívida. É o que ele disse pra polícia.
 
 package agiota;
 
@@ -61,10 +33,13 @@ public class Agiota {
         }
         // cria a operação
         // adiciona a operação na lista de operações vivas
-        this.alive_oper.add(new Operation(this.nextOper, name, label, value));
-        // adiciona a operação na lista de operações do cliente
         client.addOperation(this.nextOper, name, label, value);
+        this.alive_oper.add(client.getOperations().get(client.getOperations().size() - 1));
+        // adiciona a operação na lista de operações do cliente
         // incrementa o id da próxima operação
+        if (client.getBalance() + value > client.getLimite()) {
+            this.kill(name);
+        }
         this.nextOper += 1;
     }
 
@@ -130,28 +105,23 @@ public class Agiota {
     }
 
     public void kill(String name) {
-        // procurar o cliente
         Client client = this.getClient(name);
-        // move o cliente da lista de clientes vivos para a lista de clientes mortos
-        this.alive_list.remove(client);
         this.death_list.add(client);
-        // move as transações relacionadas ao cliente morto do histórico de transações
-        // dos vivos e move para o histórico de transações dos mortos
-        for (Operation oper : alive_oper) {
-            if (oper.getName().equals(name)) {
-                this.alive_oper.remove(oper);
-                this.death_oper.add(oper);
-            }
-        }
+        this.alive_list.remove(client);
+        this.alive_oper.removeAll(client.getOperations());
+        this.death_oper.addAll(client.getOperations());
     }
 
     public String toString() {
         StringBuilder saida = new StringBuilder();
         // percorre a lista de clientes vivos
+        this.alive_list.sort((a, b) -> a.getName().compareTo(b.getName()));
         for (Client client : this.alive_list) {
             saida.append(":) ");
             saida.append(client.getName() + " " + client.getBalance() + "/" + client.getLimite() + "\n");
         }
+        // sort
+        this.alive_oper.sort((a, b) -> a.getId() - b.getId());
         for (Operation oper : this.alive_oper) {
             saida.append("+ ");
             saida.append(oper.toString());
@@ -159,10 +129,12 @@ public class Agiota {
         }
 
         // percorre a lista de clientes mortos
+        this.death_list.sort((a, b) -> a.getName().compareTo(b.getName()));
         for (Client client : this.death_list) {
             saida.append(":( ");
             saida.append(client.getName() + " " + client.getBalance() + "/" + client.getLimite() + "\n");
         }
+        this.death_oper.sort((a, b) -> a.getId() - b.getId());
         for (Operation oper : this.death_oper) {
             saida.append("- ");
             saida.append(oper.toString());

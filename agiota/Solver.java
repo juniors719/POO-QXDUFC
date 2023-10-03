@@ -37,13 +37,11 @@ public class Solver {
                     System.out.println(re.getMessage());
                 }
             } else if (ui[0].equals("kill")) {
-                try {
-                    agiota.kill(ui[1]);
-                } catch (RuntimeException re) {
-                    System.out.println(re.getMessage());
-                }
+                agiota.kill(ui[1]);
             } else if (ui[0].equals("show")) {
                 System.out.println(agiota);
+            } else if (ui[0].equals("plus")) {
+                agiota.plus();
             } else {
                 System.out.println("fail: comando invalido");
             }
