@@ -37,9 +37,9 @@ public class Agiota {
         this.alive_oper.add(client.getOperations().get(client.getOperations().size() - 1));
         // adiciona a operação na lista de operações do cliente
         // incrementa o id da próxima operação
-        if (client.getBalance() + value > client.getLimite()) {
-            this.kill(name);
-        }
+        // if (client.getBalance() + value > client.getLimite()) {
+        // this.kill(name);
+        // }
         this.nextOper += 1;
     }
 
@@ -96,11 +96,20 @@ public class Agiota {
 
     public void plus() {
         // aumentar a divida de todos os clientes em 10%
+        ArrayList<Client> aux = new ArrayList<>();
         for (Client client : this.alive_list) {
             // calcula o valor do juros
-            int value = (int) (client.getBalance() * 0.1);
+            int value = (int) Math.ceil(client.getBalance() * 0.1);
             // adiciona a operação
             this.pushOperation(client, client.getName(), Label.PLUS, value);
+            // verificar se o cliente vai ser morto
+            if (client.getBalance() > client.getLimite()) {
+                aux.add(client);
+            }
+        }
+        // mata os clientes que devem ser mortos
+        for (Client client : aux) {
+            this.kill(client.getName());
         }
     }
 
@@ -134,7 +143,7 @@ public class Agiota {
             saida.append(":( ");
             saida.append(client.getName() + " " + client.getBalance() + "/" + client.getLimite() + "\n");
         }
-        this.death_oper.sort((a, b) -> a.getId() - b.getId());
+        // this.death_oper.sort((a, b) -> a.getId() - b.getId());
         for (Operation oper : this.death_oper) {
             saida.append("- ");
             saida.append(oper.toString());

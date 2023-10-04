@@ -50,8 +50,6 @@ public class Client {
         for (Operation oper : this.operations) {
             if (oper.getLabel() == Label.GIVE || oper.getLabel() == Label.PLUS) {
                 balance += oper.getValue();
-                if (balance > this.limite)
-                    throw new RuntimeException(oper.getName());
             } else
                 balance -= oper.getValue();
         }
