@@ -10,9 +10,7 @@ class Calculator {
     public float display;
 
     public Calculator(int batteryMax) {
-        this.batteryMax = batteryMax;
-        this.battery = 0;
-        this.display = 0;
+        // TODO
     }
 
     public void chargeBattery(int value) {
